@@ -6,11 +6,10 @@ import { CartContextProvider } from "./store/cart-context.jsx";
 function App() {
   return (
     <>
-    <CartContextProvider>
-      <Header />
-      <div id="meals">
+      <CartContextProvider>
+        <Header />
+
         <Products />
-      </div>
       </CartContextProvider>
     </>
   );

@@ -5,6 +5,7 @@ import { useState } from "react"
 import useFetch from "../hooks/useFetch.js"
 import { fetchMeals } from "../http.js";
 import { CartContext } from "../store/cart-context.jsx";
+import Button from "../UI/Button.jsx";
 
 
 export default function Products() {
@@ -13,29 +14,30 @@ export default function Products() {
     const { handleAddToCart } = useContext(CartContext);
 
     return (
-        <>
+        <ul id="meals">
             {isFetching && <p className="fallback-text">Data is fetching</p>}
             {!isFetching && error?.message && <p className="fallback-text">{error.message}</p>}
             {!isFetching && fetchedData.length > 0 && (
                 fetchedData.map((data) => {
                     return (
-                        <div className="meal-item" key={data.id}>
+                        <li className="meal-item" key={data.id}>
                             <article>
                                 <img src={`http://localhost:3000/${data.image}`} alt="" />
                                 <h3>{data.name}</h3>
-
-                                <div className="meal-item-price">
+                                <p className="meal-item-price">
                                     {data.price} zł
-                                </div>
-                                <div className="meal-item-description">
+                                </p>
+                                <p className="meal-item-description">
                                     {data.description}
-                                </div>
-                                <button className="button meal-item-actions" onClick={() => handleAddToCart(data.id)} >Add toCart</button>
+                                </p>
+                                <p className="meal-item-actions" >
+                                    <Button onClick={() => handleAddToCart(data.id, data.name, data.price)}>Add toCart</Button>
+                                </p>
                             </article>
-                        </div>
+                        </li>
                     )
                 })
             )}
-        </>
+        </ul>
     )
 }

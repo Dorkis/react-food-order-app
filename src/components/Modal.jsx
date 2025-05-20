@@ -14,11 +14,8 @@ export default function Modal({ ref, children }) {
     })
 
     return createPortal(
-        <dialog ref={dialog} className="result-modal" >
+        <dialog ref={dialog} className="result-modal modal" >
             {children}
-            <form method="dialog" >
-                <button>Close</button>
-            </form>
         </dialog>,
         document.getElementById('modal'))
 }
