@@ -8,16 +8,16 @@ import Modal from './Modal';
 
 export default function Header() {
     const dialog = useRef();
-    const { carts, modalType, setModalType } = useContext(CartContext);
+    const { carts } = useContext(CartContext);
 
     function handleOpenCart() {
-        setModalType('cart');
+       // setModalType('cart');
         dialog.current.open();
     }
 
     return (
         <>
-            <Modal ref={dialog} >{modalType === 'cart' && <Cart />}</Modal>
+            <Modal ref={dialog} ><Cart /></Modal>
             <header id="main-header">
                 <div id='title'>
                     <img src={logo} alt="food logo" />

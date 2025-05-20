@@ -8,7 +8,6 @@ function App() {
     <>
       <CartContextProvider>
         <Header />
-
         <Products />
       </CartContextProvider>
     </>

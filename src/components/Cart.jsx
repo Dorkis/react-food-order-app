@@ -3,8 +3,9 @@ import { CartContext } from "../store/cart-context";
 import Button from "../UI/Button";
 
 export default function Cart() {
-    const { carts, handleUpCount, handleDownCount } = useContext(CartContext);
+    const { carts, removeItem, addItem } = useContext(CartContext);
 
+    console.log(carts)
     function handleCheckout(){
 
     }
@@ -18,9 +19,9 @@ export default function Cart() {
                         <li className="cart-item" key={cart.name} >
                             <p>{cart.name} {cart.price}</p>
                             <div className="cart-item-actions">
-                                <button onClick={() => handleDownCount(cart.id)}>-</button>
+                                <button onClick={() => removeItem(cart.id)}>-</button>
                                 {cart.count}
-                                <button onClick={() => handleUpCount(cart.id)}>+</button>
+                                <button onClick={() => addItem(cart)}>+</button>
                             </div>
                         </li>)
                 })}

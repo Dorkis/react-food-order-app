@@ -11,7 +11,7 @@ import Button from "../UI/Button.jsx";
 export default function Products() {
 
     const { isFetching, error, fetchedData, setFetchData } = useFetch(fetchMeals, []);
-    const { handleAddToCart } = useContext(CartContext);
+    const { addItem } = useContext(CartContext);
 
     return (
         <ul id="meals">
@@ -31,7 +31,7 @@ export default function Products() {
                                     {data.description}
                                 </p>
                                 <p className="meal-item-actions" >
-                                    <Button onClick={() => handleAddToCart(data.id, data.name, data.price)}>Add toCart</Button>
+                                    <Button onClick={() => addItem(data)}>Add toCart</Button>
                                 </p>
                             </article>
                         </li>
