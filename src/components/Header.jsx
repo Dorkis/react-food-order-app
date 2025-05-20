@@ -1,23 +1,15 @@
-import { useRef } from 'react';
 import { useContext } from 'react';
 import logo from '../assets/logo.jpg'
-import { CartContext } from '../store/cart-context';
+import UserProgressContext from '../store/user-progress-context';
+import { CartContext } from "../store/cart-context";
 import Button from '../UI/Button';
-import Cart from './Cart';
-import Modal from './Modal';
 
 export default function Header() {
-    const dialog = useRef();
     const { carts } = useContext(CartContext);
-
-    function handleOpenCart() {
-       // setModalType('cart');
-        dialog.current.open();
-    }
+    const { showCart } = useContext(UserProgressContext);
 
     return (
         <>
-            <Modal ref={dialog} ><Cart /></Modal>
             <header id="main-header">
                 <div id='title'>
                     <img src={logo} alt="food logo" />
@@ -25,7 +17,7 @@ export default function Header() {
 
                 </div>
                 <nav>
-                    <Button onClick={handleOpenCart}>cart ({carts.length})</Button>
+                    <Button onClick={showCart}>cart ({carts.length})</Button>
                 </nav>
             </header>
         </>

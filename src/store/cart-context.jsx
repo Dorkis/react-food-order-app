@@ -66,3 +66,5 @@ export function CartContextProvider({ children }) {
 
   return <CartContext value={contextValue}>{children}</CartContext>;
 }
+
+export default CartContext;
