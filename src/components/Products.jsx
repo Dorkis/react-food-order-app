@@ -1,7 +1,4 @@
-import { useEffect } from "react"
-import { useRef } from "react";
 import { useContext } from "react";
-import { useState } from "react"
 import useFetch from "../hooks/useFetch.js"
 import { fetchMeals } from "../http.js";
 import { CartContext } from "../store/cart-context.jsx";
@@ -10,7 +7,7 @@ import Button from "../UI/Button.jsx";
 
 export default function Products() {
 
-    const { isFetching, error, fetchedData, setFetchData } = useFetch(fetchMeals, []);
+    const { isFetching, error, fetchedData } = useFetch(fetchMeals);
     const { addItem } = useContext(CartContext);
 
     return (

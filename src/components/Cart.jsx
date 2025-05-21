@@ -7,7 +7,7 @@ import Modal from './Modal';
 
 export default function Cart() {
     const { carts, removeItem, addItem } = useContext(CartContext);
-    const { progress, showCheckout } = useContext(UserProgressContext);
+    const { progress, showCheckout, hideCart } = useContext(UserProgressContext);
     const dialog = useRef();
 
     return (
@@ -17,7 +17,7 @@ export default function Cart() {
                 <ul >
                     {carts.map(cart => {
                         return (
-                            <li className="cart-item" key={cart.name} >
+                            <li className="cart-item" key={cart.id} >
                                 <p>{cart.name} {cart.price}</p>
                                 <div className="cart-item-actions">
                                     <button onClick={() => removeItem(cart.id)}>-</button>
@@ -29,8 +29,8 @@ export default function Cart() {
                 </ul>
                 <div className="cart-total">{carts && carts.reduce((total, cart) => (total + cart.count * cart.price), 0).toFixed(2)} zł</div>
                 <form method="dialog" className="modal-actions" >
-                    <Button textOnly >Close</Button>
-                    <Button onClick={showCheckout}>Go to checkout</Button>
+                    <Button textOnly onClick={hideCart}>Close</Button>
+                    {carts.length > 0 && <Button onClick={showCheckout}>Go to checkout</Button> }
                 </form>
             </div>
         </Modal>

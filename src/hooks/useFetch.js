@@ -1,32 +1,42 @@
+import { useCallback } from "react";
 import { useEffect, useState } from "react";
 
+function useFetch(fetchFn, method = 'GET', body) {
+  const [isFetching, setIsFetching] = useState();
+  const [error, setError] = useState();
+  const [fetchedData, setFetchData] = useState([]);
 
-function useFetch(fetchFn, initialValue) {
-    const [isFetching, setIsFetching] = useState();
-    const [error, setError] = useState();
-    const [fetchedData, setFetchData] = useState(initialValue);
+  function cleadDate() {
+    setFetchData([]);
+  }
 
-    useEffect(() => {
-        async function fetchData() {
-            setIsFetching(true);
-            try {
-                const data = await fetchFn();
-                setFetchData(data);
-            } catch (error) {
-                setError({ message: error.message || 'Failed to fetch data' });
-            }
-            setIsFetching(false);
-        }
+  const sendRequest = useCallback(
+    async function sendRequest(body) {
+      setIsFetching(true);
+      try {
+        const data = await fetchFn(body);
+        setFetchData(data);
+      } catch (error) {
+        setError({ message: error.message || "Failed to fetch data" });
+      }
+      setIsFetching(false);
+    },
+    [body]
+  );
 
-        fetchData();
-    }, [fetchFn]);
-
-    return {
-        isFetching,
-        error,
-        fetchedData,
-        setFetchData,
+  useEffect(() => {
+    if(method == 'GET' || body) {
+        sendRequest();
     }
+  }, [fetchFn, body]);
+
+  return {
+    isFetching,
+    error,
+    fetchedData,
+    sendRequest,
+    cleadDate
+  };
 }
 
 export default useFetch;
